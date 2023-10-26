@@ -4,21 +4,12 @@ import $file.scalaversion, scalaversion.scalaversion
 import $file.modules.broken, broken.broken
 
 
-object foo extends RootModule with ScalaModule {
+object foo extends ScalaModule {
   def scalaVersion = scalaversion
 
+// /mill --no-server foo.compile
+// ok in mill 0.10.x
   println(s"broken: $broken")
-// with mill 0.11.5
-
-// [error] /Users/james/code/mill/example/misc/3-import-file-ivy/build.sc:10:22: reference to broken is ambiguous;
-// [error] it is imported twice in the same scope by
-// [error] import broken.broken
-// [error] and import millbuild.modules.broken
-// [error]   println(s"broken: $broken")
-// [error]                      ^
-// [error] one error found
-// 1 targets failed
-// compile Compilation failed
 
   def ivyDeps = Agg(ivy"com.lihaoyi::os-lib:0.9.1")
   def htmlSnippet = T{ div(h1("hello"), p("world")).toString }
