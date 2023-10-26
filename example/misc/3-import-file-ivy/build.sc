@@ -1,15 +1,13 @@
 import mill._, scalalib._
 import $ivy.`com.lihaoyi::scalatags:0.12.0`, scalatags.Text.all._
 import $file.scalaversion, scalaversion.scalaversion
-import $file.modules.broken, broken.broken
+import $file.modules.broken, broken.{broken => unbroken}
 
 
 object foo extends ScalaModule {
   def scalaVersion = scalaversion
 
-// /mill --no-server foo.compile
-// ok in mill 0.10.x
-  println(s"broken: $broken")
+  println(s"broken: $unbroken")
 
   def ivyDeps = Agg(ivy"com.lihaoyi::os-lib:0.9.1")
   def htmlSnippet = T{ div(h1("hello"), p("world")).toString }
