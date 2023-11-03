@@ -1,5 +1,11 @@
+import mill.main.TokenReaders
 import mill._
+import mill.define._
 
+implicit val pathReader : mainargs.TokensReader[os.Path] = new mainargs.TokensReader.Simple[os.Path] {
+  def shortName = "path"
+  def read(strs: Seq[String]) = Right(os.Path(strs.last))
+}
 
 def foo(path: os.Path) = T.command {
   println(path)
