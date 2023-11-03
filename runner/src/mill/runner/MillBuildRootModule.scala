@@ -355,6 +355,7 @@ object MillBuildRootModule {
        |    _root_.scala.Seq(${cliImports.map(literalize(_)).mkString(", ")})
        |  )
        |  import ${backtickWrap(name)}._
+       |  import mill.runner.MillCliConfigParser.PathRead
        |  implicit lazy val millBaseModuleInfo: _root_.mill.main.RootModule.Info = _root_.mill.main.RootModule.Info(
        |    millBuildRootModuleInfo.projectRoot,
        |    _root_.mill.define.Discover[${backtickWrap(name)}]
