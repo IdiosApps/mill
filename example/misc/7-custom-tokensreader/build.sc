@@ -2,13 +2,15 @@ import mill.main.TokenReaders
 import mill._
 import mill.define._
 
-implicit val pathReader : mainargs.TokensReader[os.Path] = new mainargs.TokensReader.Simple[os.Path] {
-  def shortName = "path"
-  def read(strs: Seq[String]) = Right(os.Path(strs.last))
-}
+object foo extends Module {
+    implicit val pathReader : mainargs.TokensReader[os.Path] = new mainargs.TokensReader.Simple[os.Path] {
+      def shortName = "path"
+      def read(strs: Seq[String]) = Right(os.Path(strs.last))
+    }
 
-def foo(path: os.Path) = T.command {
-  println(path)
+    def apply(path: os.Path) = T.command {
+        println(path)
+    }
 }
 
 // This example illustrates usage of custom `TokensReader`s.
